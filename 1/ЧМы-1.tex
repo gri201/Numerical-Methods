@@ -1,0 +1,227 @@
+\documentclass[titlepage]{article}
+\usepackage[12pt]{extsizes} 
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+%\usepackage{pscyr}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,secdot}
+\usepackage[left=30mm, top=20mm, right=30mm, bottom=20mm, nohead, footskip=15mm]{geometry} 
+\usepackage[pdftex]{graphicx}
+\usepackage[indentfirst]{titlesec}
+\usepackage[usenames]{color}
+\usepackage{colortbl}
+\usepackage{listings}
+\usepackage{secdot}
+
+\def\l{\left}
+\def\r{\right}
+\def\le{\leqslant}
+\def\ge{\geqslant}
+
+\begin{document} 
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{definition}{Определение}
+\renewcommand{\proofname}{Доказательство}
+
+\begin{center}
+\hfill \break
+\hfill \break
+\hfill \break
+\LARGE Вычисление несобственного интеграла с помощью квадратурных формул \\
+\hfill \break
+\large Г.В. Мигунов \\
+\hfill \break
+\today \\
+
+\end{center}
+
+\section{Постановка задачи}
+Требуется приближенно вычислить интеграл: 
+\begin{gather}
+	\int_{0}^{+\infty}{\frac{x^3-1}{\sqrt{x}}\frac{sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}dx}
+\end{gather}
+с заданной точностью $\varepsilon = 10^{-2}$.
+
+\section{Доказательство сходимости интеграла}
+Прежде чем приступить к вычислению интеграла, необходимо убедиться в его сходимости во всей области интегрирования. Для этого исследуем подынтегральную функцию $f(x) = \frac{x^3-1}{\sqrt{x}}\frac{sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}$ в особых точках на промежутке $[0, +\infty)$. Рассмотрим три особые точки: $x = 0$, $x = 1$, $x \to \infty$:
+
+\begin{enumerate}
+	\item $x = 0$ \\
+	\begin{gather}
+		\notag \lim_{x \to 0}{f(x)} = \lim_{x \to 0}{\frac{x^3-1}{\sqrt{x}}\frac{sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}} = \lim_{x \to 0}{\frac{(x^3-1)(x + o(x))^3}{\sqrt{x}\ln{x}(x + o(x))}} = \\
+		\notag = -\lim_{x \to 0}{\frac{x^2 + o(x^2)}{\sqrt{x}\ln{x}}} = -\lim_{x \to 0}{\frac{x^{3/2}}{\ln{x}} + o(x^{3/2})} = 0
+	\end{gather}
+	
+Таким образом, $x = 0$ является устранимой особой точкой. Это значит, что в нуле мы можем доопределить $f(x)$ до непрерывной функции, поэтому интеграл не является несобственным в точке $x = 0$.
+
+	\item $x = 1$ \\
+	\begin{gather}
+		\notag \lim_{x \to 1}{f(x)} = \lim_{x \to 1}{\frac{x^3-1}{\sqrt{x}}\frac{sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}} = \frac{\sin^3{1}}{e\ln{2}}\lim_{x \to 1}{\frac{x^3 - 1}{\ln{x}}} = \\ \notag = \frac{\sin^3{1}}{e\ln{2}}\lim_{x \to 1}{\frac{(x-1)(x^2+x+1)}{(x-1) + o(x-1)}} = \frac{\sin^3{1}}{e\ln{2}}\lim_{x \to 1}{(x^2+x+1)} = \frac{3\sin^3{1}}{e\ln{2}}
+	\end{gather}  
+Аналогично предыдущей точке, $x = 1$ является устранимой особой точкой.
+	\item $x \to \infty$ \\
+	
+	$\exists$ такое большое число $C$, что:
+	\begin{gather}
+		\notag \l| \int_{C}^{+\infty}{f(x)dx} \r| \le \int_{C}^{+\infty}{\l| \frac{x^3-1}{\sqrt{x}}\frac{sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}\r|dx} \le \\ \notag \le\int_{C}^{+\infty}{\l| \frac{x^3}{\sqrt{x}}e^{-x^3}\r| dx} \le \int_{C}^{+\infty}{\l| x^{3/2}e^{-x^{5/2}} \r|dx} = \frac{2}{5}e^{-C^{5/2}} < \infty
+	\end{gather}
+Сходимость интеграла на бесконечности доказана.
+\end{enumerate}
+
+Таким образом, мы доказали, что данный интеграл сходится на промежутке $[0, +\infty)$.
+
+\section{Оценки параметров $\delta_1$, $\delta_2$ и $C$}
+Положим $\varepsilon_1 = \varepsilon_2 = \varepsilon_3 = \varepsilon_4 = \varepsilon_5 = \varepsilon/5 = 2\cdot10^{-3}$ и разобьем наш промежуток интегрирования на 5 частей: $[0, \delta_1), [\delta_1, 1-\delta_2), [1-\delta_2, 1+\delta_2), [1+\delta_2, C), [C, +\infty)$.
+
+Теперь нам необходимо подобрать числа $\delta_1, \delta_2$ и $C$ таким образом, чтобы $\l|\int_{0}^{\delta_1}{f(x)dx}\r| \le \varepsilon_1$, $\l|\int_{1-\delta_2}^{1+\delta_2}{f(x)dx}\r| \le \varepsilon_3$ и $\l|\int_{C}^{+\infty}{f(x)dx}\r| \le \varepsilon_5$. Тем самым, задача сведется к вычислению интегралов $\tilde I_2 = \int_{\delta_1}^{1-\delta_2}{f(x)dx}$ с точностью $\varepsilon_2$ и $\tilde I_4 = \int_{1+\delta_2}^{C}{f(x)dx}$ с точностью $\varepsilon_4$.
+
+\begin{enumerate}
+	\item Оценим $\delta_1$. \\
+	Будем пользоваться следующими фактами:
+
+	\begin{gather}
+		\notag \sin(x) \le x \\
+		\notag \text{и} \\
+		\notag \frac{x-1}{x} \le \ln{x} < x-1
+	\end{gather}
+
+	\begin{gather}
+		\notag \l|\int_{0}^{\delta_1}{f(x)dx}\r| \le \int_{0}^{\delta_1}{\l|f(x)\r|dx} \le \int_{0}^{\delta_1}{\l| \frac{x^3-1}{\sqrt{x}}\frac{sin^{3}{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}\r| dx} \le \\
+		\notag \le \int_{0}^{\delta_1}{\l| \frac{(x-1)(x^2+x+1)x(x+1)x^3}{\sqrt{x}(x-1)x}\r|dx} = \int_{0}^{\delta_1}{\l| (x^2+x+1)(x+1)x^{5/2} \r|dx} \le \\
+		\notag \le 6\int_{0}^{\delta_1}{x^{5/2}dx} = \frac{12}{7}\delta_1^{7/2} \le \varepsilon_1
+	\end{gather}
+	Следовательно, $$\delta_1 \le \l(\frac{7}{12}\varepsilon_1\r)^{2/7}$$
+	Подставив $\varepsilon_1 = 2\cdot10^{-3}$, получим $\bf{\delta_1 = 0.146}$.
+	
+	\item Оценим $\delta_2$. \\
+	Будем считать, что $\delta_2 < 0.04 < \frac{\pi}{3} - 1$. При таких $\delta_2$ имеют место следующие оценки: 
+	\begin{enumerate}
+		\item $\sin{x} < \frac{\sqrt{3}}{2}$
+		\item $e^{-x^3} < \frac{1}{2}$
+		\item $\frac{1}{\ln{(2+x)}} \le \frac{2+x}{1+x} \le \{x > 1-0.04\} \le \frac{74}{49} $
+		\item $\sqrt{x+1} \le \frac{x+2}{2}$
+		\item $\max_{x\in[-\delta_2;\delta_2]}{\l|(x^2+3x+3)(x+2)\r|} < 7$
+	\end{enumerate}
+	Тогда, получаем:
+	\begin{gather}
+		\notag \l|\int_{1-\delta_2}^{1+\delta_2}{f(x)dx}\r| \le \int_{1-\delta_2}^{1+\delta_2}{\l|f(x)\r|dx} \le \int_{1-\delta_2}^{1+\delta_2}{\l| \frac{x^3-1}{\sqrt{x}}\frac{sin^{3}{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}\r|dx} = \\
+		\notag = \int_{-\delta_2}^{\delta_2}{\l| \frac{(x+1)^3-1}{\sqrt{x+1}}\frac{sin^{3}{(x+1)}}{\ln{(x+1)}\ln{(x+2)}}e^{-(x+1)^3}\r|dx}
+		\notag \le \\ 
+		\notag \le \frac{74\cdot3\cdot\sqrt{3}}{49\cdot2\cdot8}\int_{-\delta_2}^{\delta_2}{\l| \frac{(x^3+3x^2+3x)(1+x)}{x\sqrt{x+1}}\r|dx} \le \frac{111\sqrt{3}}{784} \int_{\delta_2}^{\delta_2}{\l|(x^2+3x+3)(x+2)\r|dx} \le \\
+		\notag \le \frac{111\sqrt{3}}{784}\max_{x \in [-\delta_2; \delta_2]}{\l|(x^2+3x+3)(x+2)\r|}\cdot 2\delta_2 \le \frac{1554\sqrt{3}}{784}\cdot\delta_2 \le \varepsilon_3
+	\end{gather}
+	Подставив $\varepsilon_3 = 2 \cdot 10^{-3}$, получим $\bf{\delta_2 = 0.0005}$.
+	\item Оценим $C$.
+	
+	Заметим, что $x^{5/2}e^{-x^{3}} \le x^{1.85}e^{-x^{2.85}}$ при $x \ge 1.7$. Тогда:
+	\begin{gather}
+		\notag \l|\int_{C}^{+\infty}{f(x)dx}\r| \le \int_{C}^{+\infty}{\l| \frac{x^3-1}{\sqrt{x}}\frac{sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}\r|dx} \le \\
+		\notag \le \frac{1}{\ln^2{C}}\int_{C}^{+\infty}{\l|x^{5/2}e^{-x^3}\r|dx} \le \frac{1}{\ln^2{C}}\int_{C}^{+\infty}{\l|x^{1.85}e^{-x^{2.85}}\r|dx} = \frac{100}{285}\frac{e^{-C^{2.85}}}{\ln^2{C}} = F(C) \le \varepsilon_5
+	\end{gather}
+	Далее, заметим, что $F(1.8839) \approx 0.002001$, а $F(1.884) \approx 0.001999$. Так как $F(C)$ монотонно убывает на всей числовой оси, получаем, что можно взять $\bf{C = 1.884}$. 
+\end{enumerate}
+\section{Квадратурные формулы для $I_2$ и $I_4$}
+Будем вычислять $I_2$ и $I_4$ по составной формуле прямоугольников. Для функции $f(x)$, определенной на некотором отрезке $[a,b]$ интеграл от нее приближенно вычисляется по формуле:
+$$I(f) = \int_{a}^{b}{f(x)dx} \approx S_N(f) = \frac{1}{N}\sum_{i=1}^{N}{f\l(a+(b-a)\frac{i-1/2}{N}\r)}$$
+
+\section{Оценка погрешности квадратурных формул}
+Погрешностью квадратурной формулы является величина:
+$$R_N(f) = I(f) - S_N(f)$$
+Для формулы прямоугольников справедлива следующая оценка:
+$$\l|R_N(f)\r| \le A\frac{(b-a)^2}{4N},$$
+для некоторого числа $A$, такого, что $\l|f'(x)\r| \le A$ на $[a,b]$. Таким образом, для вычисления необходимого числа отрезков разбиения нам необходимо оценить $\l|f'(x)\r|$ на $[a,b]$.
+
+\section{Оценка производной}
+Рассмотрим производную функции $f(x)$:
+\begin{align}
+	\notag \l(\frac{x^3-1}{\sqrt{x}}\frac{\sin^3{x}}{\ln{x}\ln{(1+x)}}e^{-x^3}\r)' &= -\frac{e^{-x^3}(x^3-1)\sin^3{x}}{\sqrt{x}(x+1)\ln{x}\ln{(1+x)}} + \frac{3e^{-x^3}(x^3-1)\sin^2{x}\cos{x}}{\sqrt{x}\ln{x}\ln{(1+x)}} - \\
+	\notag &- \frac{e^{-x^3}(x^3-1)\sin^3{x}}{x^{3/2}\ln^2{x}\ln{(1+x)}} + \frac{3e^{-x^3}x^{3/2}\sin^3{x}}{\ln{x}\ln{(1+x)}} - \\
+	\notag &- \frac{3e^{-x^3}x^{3/2}(x^3-1)\sin^3{x}}{\ln{x}\ln{(1+x)}} - \frac{e^{-x^3}(x^3-1)\sin^3{x}}{2x^{3/2}\ln{x}\ln{(1+x)}}
+\end{align}
+
+Будем оценивать $\l|f'(x)\r|$ отдельно на $[\delta_1, 1-\delta_2]$ и $[1+\delta_2, C]$. При оценке будем пользоваться следующими неравенствами:
+\begin{enumerate}
+	\item $|\sin{x}| \le \frac{\sqrt{3}}{2}, \ x \in [\delta_1, 1-\delta_2]$
+	\item $\frac{x^3-1}{\ln{x}}$ монотонно возрастает на $[0,+\infty]$	
+	\item $\frac{(1+x)}{\ln{(1+x)}}$ монотонно убывает на $[0,1]$
+\end{enumerate}
+
+Оценим $|f'(x)|$ на $[\delta_1, 1-\delta_2]$:
+
+$$\l| \frac{e^{-x^3}(x^3-1)\sin^3{x}}{\sqrt{x}(x+1)\ln{x}\ln{(1+x)}} \r| \le \frac{3\sqrt{3}}{8}\l| \frac{e^{-x^3}\sqrt{x}(x+1)}{\ln{(1+x)}} \r| \le \frac{3\sqrt{3}}{8}\l| \frac{e^{-\delta_1^3}(1+\delta_1)\sqrt{1-\delta_2}}{\ln{(1+\delta_1)}} \r| \le \bf{5.4437}$$
+$$\l| \frac{3e^{-x^3}(x^3-1)\sin^2{x}\cos{x}}{\sqrt{x}\ln{x}\ln{(1+x)}} \r| \le \frac{9}{4}\l| \frac{e^{-x^3}(x+1)^3}{\sqrt{x}} \r| \le \frac{9}{4}\l| \frac{e^{-\delta_1^3}(2-\delta_2)^3}{\sqrt{\delta_1}} \r| \le \bf{46.9267}$$
+$$\l| \frac{e^{-x^3}(x^3-1)\sin^3{x}}{x^{3/2}\ln^2{x}\ln{(1+x)}} \r| \le \frac{3\sqrt{3}}{8} \l| \frac{e^{-\delta_1^3}(2-\delta_2)^3}{\sqrt{\delta_1}\delta_2} \r| \le \bf{27093.1}$$
+$$\l| \frac{3e^{-x^3}x^{3/2}\sin^3{x}}{\ln{x}\ln{(1+x)}} \r| \le \frac{9\sqrt{3}}{8} \l| \frac{e^{-x^3}x^{3/2}(1+x)}{(x-1)} \r| \le \frac{9\sqrt{3}}{8} \l| \frac{e^{-\delta_1^3}(1-\delta_2)^{3/2}(2-\delta_2)}{\delta_2} \r| \le \bf{3877.24}$$
+$$\l| \frac{3e^{-x^3}x^{3/2}(x^3-1)\sin^3{x}}{\ln{x}\ln{(1+x)}} \r| \le \frac{9\sqrt{3}}{8} \l| e^{-x^3}x^{3/2}(1+x)^3 \r| \le \frac{9\sqrt{3}}{8} \l| e^{-\delta_1^3}(1-\delta_2)^{3/2}(2-\delta_2)^3 \r| \le \bf{15.4936}$$
+$$\l| \frac{e^{-x^3}(x^3-1)\sin^3{x}}{2x^{3/2}\ln{x}\ln{(1+x)}} \r| \le \frac{3\sqrt{3}}{16} \l| \frac{e^{-x^3}(x+1)^2}{\sqrt{x}\ln{(1+x)}} \r| \le \frac{3\sqrt{3}}{16} \l| \frac{e^{-\delta_1^3}(1+\delta_1)(2-\delta_2)}{\sqrt{\delta_1}\ln{(1+\delta_1)}} \r| \le \bf{14.2433}$$
+
+Получили оценку: $|f'(x)| \le A_1 = 31052.447$ на $[\delta_1, 1-\delta_2]$. \\
+Теперь оценим $|f'(x)|$ на $[1+\delta_2, C]$:
+
+$$\l| \frac{e^{-x^3}(x^3-1)\sin^3{x}}{\sqrt{x}(x+1)\ln{x}\ln{(1+x)}} \r| \le \l| \frac{e^{-(1+\delta_2)^3}(C^3-1)}{2\ln{C}\ln{2}} \r| \le \bf{2.3792}$$
+$$\l| \frac{3e^{-x^3}(x^3-1)\sin^2{x}\cos{x}}{\sqrt{x}\ln{x}\ln{(1+x)}} \r| \le \l| \frac{3e^{-(1+\delta_2)^3}(C^3-1)}{\ln{C}\ln{2}} \r| \le \bf{14.2749}$$
+$$\l| \frac{e^{-x^3}(x^3-1)\sin^3{x}}{x^{3/2}\ln^2{x}\ln{(1+x)}} \r| \le \l| \frac{e^{-(1+\delta_2)^3}(C+1)^2}{\ln{2}\ln{(1+\delta_2)}} \r| \le \bf{8817.74}$$
+$$\l| \frac{3e^{-x^3}x^{3/2}\sin^3{x}}{\ln{x}\ln{(1+x)}} \r| \le \l| \frac{3e^{-(1+\delta_2)^3}C^{3/2}}{\ln{(1+C)}\ln{(1+\delta_2)}} \r| \le \bf{5382.27}$$
+$$\l| \frac{3e^{-x^3}x^{3/2}(x^3-1)\sin^3{x}}{\ln{x}\ln{(1+x)}} \r| \le \l| \frac{3e^{-(1+\delta_2)^3}C^{3/2}(C^3-1)}{\ln{(1+C)}\ln{C}} \r| \le \bf{24.1574}$$
+$$\l| \frac{e^{-x^3}(x^3-1)\sin^3{x}}{2x^{3/2}\ln{x}\ln{(1+x)}} \r| \le \l|\frac{e^{-(1+\delta_2)^3}(C+1)^2}{2\ln{2}} \r| \le \bf{2.2039}$$
+
+Таким образом, $|f'(x)| \le A_2 = 14243.025$ на $[1+\delta_2, C]$.
+
+\section{Таблица параметров}
+Вычислим $N_1$ и $N_2$:
+$$N_1 = \frac{A_1(1-\delta_1-\delta_2)^2}{4\varepsilon_3} = 2827567$$
+$$N_2 = \frac{A_2(C-1-\delta_2)^2}{4\varepsilon_4} = 1389714$$
+
+Запишем полученные выше результаты в таблицу:
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		$\delta_1$ & $\delta_2$ & $C$ & $A_1$ & $A_2$ & $N_1$ & $N_2$ \\
+		\hline
+		0.146 & 0.0005 & 1.884 & 31052.447 & 14243.025 & 2827567 & 1389714 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\section{Результаты расчёта}
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$\tilde I_2$ & $\tilde I_4$ & $\tilde I$\\
+		\hline
+		0.46678 & 0.30756 & 0.77434 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\section{Правило Рунге}
+Пусть $I$ - точное значение интеграла, а $S_N$ - его приближенное значение, вычисленное с использованием $N$ обращений к подынтегральной функции. Предположим, что известен главный член погрешности квадратурной формулы:
+$$I - S_N = CN^{-m} + o(N^{-m}),$$
+где $m$ - известно, а $C$ - нет. Тогда, подставляя в формулы выше $N_1$ и $N_2 = 2N_1$, получим:
+\begin{gather}
+	\notag I - S_{N_1} = CN_1^{-m} + o(N_1^{-m}) \\
+	\notag I - S_{N_2} = CN_2^{-m} + o(N_2^{-m}) \\
+	\notag S_{N_1} - S_{N_2} \approx C \frac{N_2^m - N_1^m}{N_2^m N_1^m} \Rightarrow \\
+	\notag C \approx \frac{S_{N_1} - S_{N_2}}{N_2^m - N_1^m}N_2^m N_1^m \Rightarrow \\
+	\notag I - S_{N_2} = \frac{S_{N_1} - S_{N_2}}{N_2^m - N_1^m}N_1^m
+\end{gather}
+Тогда, если взять $N_2 = 2N_1 = 2N$ получим:
+$$\l| I - S_{2N} \r| = \frac{\l| S_{2N} - S_N \r|}{2^m - 1} \le \varepsilon$$
+
+\section{Результаты по правилу Рунге}
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$\hat N_1$ & $\hat I_2$ & $\hat N_2$ & $\hat I_4$ & $\hat N$ & $\hat I$ \\
+		\hline
+		128 & 0.46984 & 128 & 0.30431 & 256 & 0.77415 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+
+\end{document}
