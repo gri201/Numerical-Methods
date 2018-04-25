@@ -6,25 +6,22 @@ def phi1(init_cond_number, x):
         if init_cond_number == 1:
             return sin(2 * pi * x)
         elif init_cond_number == 2:
-            return 1 - fabs(2 * (x - 1 / 2))
+            return sin(2 * pi * x)
         elif init_cond_number == 3:
-            if x <= 1 / 2:
-                return 0
-            else:
-                return 1
+            return x * (1 - x)
 
 def phi2(init_cond_number, x):
     if init_cond_number == 1:
         return cos(2 * pi * x)
     elif init_cond_number == 2:
-        return sin(2 * pi * x) + 0.1 * sin(100 * pi *x)
+        return sin(2 * pi * x) + 0.1 * sin(100 * pi * x)
     elif init_cond_number == 3:
-        if x <= 1. / 5 or x >= 4. / 5:
-            return 0.
-        elif x <= 2. / 5 or x >= 3. / 5:
-            return 1. / 2
-        else:
-            return 1.
+            if x <= 1. / 4:
+                return x
+            elif x >= 3. / 4:
+                return 1. - x
+            else:
+            	return ((- 2) * ((x - (1. / 2)) ** 2) + (3. / 8))
 
 def psi1(init_cond_number, c1, c2, x):
     return c1 * phi1(init_cond_number, x) + c2 * phi2(init_cond_number, x)
@@ -185,20 +182,15 @@ def micro_scope(u):
 
 #(-1,2,2,1,2,0.1,0.5,1,0.001,0.005)
 
-# init_cond_number - chose phi psi
-# scheme_number - chose scheme
-#	1 - 
-# t1, t2, t3 - secheniya po t
-# l1, l2 - lambda[i]
-# c1, c2, c3, c4 - coeff-ts for phi[i]
-# v1, v2, v01, v02 - scheme for phi[i]()
 
+init_cond_number = input("Please, choose initial conditions (1/2/3): ")
+scheme_number = input(
+	"Please, choose scheme: \n 1: Conditionally stable scheme \n 2: Unconditionally stable scheme \n Your choise: ")
 
-a = -1.
-b = 2.
-c = 2.
-init_cond_number = input("Please, chose initial conditions (1/2/3): ")
-scheme_number = input("Please, chose scheme (1/2): ")
+a = 1.
+b = 0.
+c = 1.
+
 t1 = 0.2
 t2 = 0.5
 t3 = 0.9
@@ -218,12 +210,12 @@ for i in range(0, N + 1):
     z[i] = h * i
 
 plt.figure(figsize = (13, 7))
-plt.axis([- ots, 1 + ots, - 1 + floor(init_cond_number / 2) - 10 * ots, 1 + 10 * ots])
+#plt.axis([- ots, 1 + ots, - 1 + floor(init_cond_number / 2) - 10 * ots, 1 + 10 * ots])
 plt.plot(z, v01, z, vt11, z, vt21, z, v1)
 plt.legend(('t=0','t='+str(t1),'t='+str(t2),'t='+str(t3)), loc = 5)
 
 plt.figure(figsize = (13, 7))
-plt.axis([- ots, 1 + ots, - 1 + floor(init_cond_number / 3) - 10 * ots, 1 + 10 * ots])
+#plt.axis([- ots, 1 + ots, - 1 + floor(init_cond_number / 3) - 10 * ots, 1 + 10 * ots])
 plt.plot(z, v02, z, vt12, z, vt22, z, v2)
 plt.legend(('t=0','t='+str(t1),'t='+str(t2),'t='+str(t3)), loc = 5)
 
