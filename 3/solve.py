@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 from math import *
 
 def phi1(init_cond_number, x):
-        if init_cond_number == 1:
-            return sin(2 * pi * x)
-        elif init_cond_number == 2:
-            return sin(2 * pi * x)
-        elif init_cond_number == 3:
-            return x * (1 - x)
+    if init_cond_number == 1:
+        return sin(2 * pi * x)
+    elif init_cond_number == 2:
+        return sin(2 * pi * x)
+    elif init_cond_number == 3:
+        return x * (1 - x)
 
 def phi2(init_cond_number, x):
     if init_cond_number == 1:

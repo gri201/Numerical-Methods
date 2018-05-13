@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2017.3.1)  25 APR 2018 00:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2017.3.1)  14 MAY 2018 02:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -755,7 +755,17 @@ File: pppdftex.def 2015/05/11 v0.4x Pdfpages driver for pdfTeX (AM)
 \AM@toc@title=\toks33
 \c@AM@survey=\count125
 \AM@templatesizebox=\box32
-) (/Users/gregory/Desktop/Учеба/ЧМы/3/.texpadtmp/ЧМы-3.aux)
+) (/Users/gregory/Desktop/Учеба/ЧМы/3/.texpadtmp/ЧМы-3.aux
+
+LaTeX Warning: Label `fig:test1' multiply defined.
+
+
+LaTeX Warning: Label `fig:test1' multiply defined.
+
+
+LaTeX Warning: Label `fig:test1' multiply defined.
+
+)
 \openout1 = `ЧМы-3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
@@ -778,8 +788,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 \AtBeginShipoutBox=\box33
 Package hyperref Info: Link coloring OFF on input line 25.
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
  (/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
@@ -887,7 +896,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 127.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 127.
- <img1.pdf, id=84, 151.23201pt x 143.58342pt>
+ <img1.pdf, id=88, 151.23201pt x 143.58342pt>
 File: img1.pdf Graphic file (type pdf)
  <use img1.pdf>
 Package pdftex.def Info: img1.pdf used on input line 151.
@@ -900,7 +909,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 153.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 153.
- [2] <img2.pdf, id=93, 80.01764pt x 36.08301pt>
+ [2] <img2.pdf, id=97, 80.01764pt x 36.08301pt>
 File: img2.pdf Graphic file (type pdf)
  <use img2.pdf>
 Package pdftex.def Info: img2.pdf used on input line 160.
@@ -909,12 +918,12 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 164.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 164.
- <img3.pdf, id=94, 80.01764pt x 36.08301pt>
+ <img3.pdf, id=98, 80.01764pt x 36.08301pt>
 File: img3.pdf Graphic file (type pdf)
  <use img3.pdf>
 Package pdftex.def Info: img3.pdf used on input line 172.
 (pdftex.def)             Requested size: 113.81102pt x 51.32243pt.
- <img4.pdf, id=95, 80.01764pt x 36.08301pt>
+ <img4.pdf, id=99, 80.01764pt x 36.08301pt>
 File: img4.pdf Graphic file (type pdf)
  <use img4.pdf>
 Package pdftex.def Info: img4.pdf used on input line 178.
@@ -932,7 +941,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 218.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 218.
- <img5.pdf, id=162, 80.01764pt x 36.08301pt>
+ <img5.pdf, id=166, 80.01764pt x 36.08301pt>
 File: img5.pdf Graphic file (type pdf)
  <use img5.pdf>
 Package pdftex.def Info: img5.pdf used on input line 222.
@@ -1088,7 +1097,6 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 560.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 560.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 572.
 Package babel Info: Redefining russian shorthand "|
 (babel)             in language append on input line 572.
 Package babel Info: Redefining russian shorthand "~
@@ -1098,27 +1106,75 @@ Package babel Info: Redefining russian shorthand "|
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language append on input line 572.
  [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 572.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 574.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 574.
+ <1_1.png, id=231, 939.51pt x 505.89pt>
+File: 1_1.png Graphic file (type png)
+ <use 1_1.png>
+Package pdftex.def Info: 1_1.png used on input line 580.
+(pdftex.def)             Requested size: 221.78923pt x 119.4245pt.
+ <1_2.png, id=233, 939.51pt x 505.89pt>
+File: 1_2.png Graphic file (type png)
+ <use 1_2.png>
+Package pdftex.def Info: 1_2.png used on input line 586.
+(pdftex.def)             Requested size: 221.78923pt x 119.4245pt.
+ <2_1.png, id=234, 939.51pt x 505.89pt>
+File: 2_1.png Graphic file (type png)
+ <use 2_1.png>
+Package pdftex.def Info: 2_1.png used on input line 592.
+(pdftex.def)             Requested size: 221.78923pt x 119.4245pt.
+ <2_2.png, id=235, 939.51pt x 505.89pt>
+File: 2_2.png Graphic file (type png)
+ <use 2_2.png>
+Package pdftex.def Info: 2_2.png used on input line 598.
+(pdftex.def)             Requested size: 221.78923pt x 119.4245pt.
+ <3_1.png, id=236, 939.51pt x 505.89pt>
+File: 3_1.png Graphic file (type png)
+ <use 3_1.png>
+Package pdftex.def Info: 3_1.png used on input line 604.
+(pdftex.def)             Requested size: 221.78923pt x 119.4245pt.
+ <3_2.png, id=237, 939.51pt x 505.89pt>
+File: 3_2.png Graphic file (type png)
+ <use 3_2.png>
+Package pdftex.def Info: 3_2.png used on input line 610.
+(pdftex.def)             Requested size: 221.78923pt x 119.4245pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 618.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 618.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 618.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language append on input line 618.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language append on input line 618.
+ [13 <./1_1.png> <./1_2.png> <./2_1.png> <./2_2.png> <./3_1.png> <./3_2.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 618.
  (/Users/gregory/Desktop/Учеба/ЧМы/3/.texpadtmp/ЧМы-3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 572.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 572.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 618.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 618.
 Package rerunfilecheck Info: File `ЧМы-3.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 572.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 618.
  ) 
 Here is how much of TeX's memory you used:
- 13466 strings out of 493994
- 187554 string characters out of 6158893
- 278860 words of memory out of 5000000
- 16543 multiletter control sequences out of 15000+600000
+ 13506 strings out of 493994
+ 187959 string characters out of 6158893
+ 278904 words of memory out of 5000000
+ 16568 multiletter control sequences out of 15000+600000
  16439 words of font info for 42 fonts, out of 8000000 for 9000
  735 hyphenation exceptions out of 8191
  34i,11n,35p,679b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
  </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1200.600pk> </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lati1200.600pk> </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1728.600pk> </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1440.600pk> </Users/gregory/Library/texlive/2015basic/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm2074.600pk></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on /Users/gregory/Desktop/Учеба/ЧМы/3/.texpadtmp/ЧМы-3.pdf (12 pages, 437803 bytes).
+Output written on /Users/gregory/Desktop/Учеба/ЧМы/3/.texpadtmp/ЧМы-3.pdf (13 pages, 910275 bytes).
 PDF statistics:
- 509 PDF objects out of 1000 (max. 8388607)
- 238 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 154 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 539 PDF objects out of 1000 (max. 8388607)
+ 254 compressed objects within 3 object streams
+ 53 named destinations out of 1000 (max. 500000)
+ 192 words of extra memory for PDF output out of 10000 (max. 10000000)
 
